@@ -141,7 +141,7 @@ public class BoardController {
 	}
 	
 	// 첨부파일 삭제
-	@DeleteMapping(value = "/{uuid}", produces = {MediaType.IMAGE_JPEG_VALUE})
+	@DeleteMapping(value = "/file/{uuid}", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> remove(@PathVariable("uuid") String uuid){
 		log.info(">>> comment File delete uuid : " + uuid);
 		int isUp = bsv.removeFile(uuid);

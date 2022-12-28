@@ -57,12 +57,12 @@ document.addEventListener('change', (e) => {
 
 async function removeFileAtServer(uuid){
     try {
-        const url = '/board/' + uuid;
+        const url = '/board/file/' + uuid;
         const config = {
             method : 'delete'
         };
         const resp = await fetch(url, config);
-        const result = resp.regExpImg();
+        const result = await resp.text();
         return result;
     } catch (error) {
         console.log(error);
@@ -72,12 +72,13 @@ async function removeFileAtServer(uuid){
 document.addEventListener('click', (e)=>{
     if(e.target.classList.contains('file-x')){
         let li = e.target.closest('li');
-        let uuidVal = li.dataset.uuid;
+        let uuidVal = e.target.dataset.uuid;
 
         console.log(uuidVal);
         removeFileAtServer(uuidVal).then(result =>{
             if(result > 0){
                 alert("파일 삭제 성공");
+                li.remove();
             }
 
         });

@@ -130,8 +130,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int removeFile(String uuid) {
-		int isUp = 
-		return isUp;
+		return fdao.deleteFile(uuid);
 	} 
 
 }
