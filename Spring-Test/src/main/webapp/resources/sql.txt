@@ -1,0 +1,54 @@
+create database springtest;
+
+use springtest;
+
+-- 유저생성구문
+create user 'springuser'@'localhost'identified by 'mysql';
+
+-- 권한생성구문
+grant all privileges on DB명.* to '계정아이디'@'localhost' identified by '비밀번호';
+
+-- 변경내용 메모리에 반영(적용완료)
+flush privileges;
+
+create table board(
+bno int not null auto_increment,
+title varchar(200),
+content text,
+writer varchar(100),
+isDel varchar(50) default "N",
+registerDate datetime default now(),
+read_count int default 0,
+primary key(bno));
+
+create table user(
+id varchar(100) not null,
+pw varchar(500) not null,
+age int,
+name varchar(100),
+email varchar(100),
+home varchar(100),
+primary key(id));
+
+--2022-12-26
+create table comment(
+cno int auto_increment,
+bno int not null,
+writer varchar(100) not null,
+content text not null,
+reg_at datetime default now(),
+mod_at datetime default now(),
+primary key(cno));
+
+-2022-12-27
+create table file(
+uuid varchar(256),
+save_dir varchar(256) not null,
+file_name varchar(512) not null,
+file_type tinyint(1) default 0,
+bno int,
+file_size int,
+reg_at datetime default now(),
+primary key(uuid));
+
+

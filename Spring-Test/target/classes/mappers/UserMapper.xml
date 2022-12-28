@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.ezen.myProject.repository.UserDAO"> <!-- 이곳에서 지시하는 인터페이스의 메서드를 ID로 쓰겠다 -->
+  <select id="getUser" resultType="com.ezen.myProject.domain.UserVO">
+  	select * from user 
+  	where id = #{id}
+  </select>
+  <insert id="insertUser">
+  	insert into user(id, pw, name, age, email, home)
+  	values(#{id}, #{pw}, #{name}, #{age}, #{email}, #{home})
+  </insert>
+  
+ <!--  <select id="getUsers">
+  	select * from user
+  	where 
+  </select> -->
+  </mapper>
