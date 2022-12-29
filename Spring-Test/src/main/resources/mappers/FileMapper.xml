@@ -16,4 +16,7 @@
   	<delete id="deleteFile">
   		delete from file where uuid = #{uuid}
   	</delete>
+  	<select id="selectFileOne" resultType="com.ezen.myProject.domain.FileVO">
+  		select * from file where uuid = #{uuid}
+  	</select>
   </mapper>

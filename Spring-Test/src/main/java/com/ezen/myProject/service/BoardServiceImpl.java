@@ -131,6 +131,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int removeFile(String uuid) {
 		return fdao.deleteFile(uuid);
+	}
+
+	@Override
+	public FileVO getFile(String uuid) {
+		return fdao.selectFileOne(uuid);
 	} 
 
 }

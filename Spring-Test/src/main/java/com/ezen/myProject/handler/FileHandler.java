@@ -78,6 +78,41 @@ public class FileHandler {
 		return fList;
 	}
 	
+	public int deleteFile(FileVO fvo) {
+		int isOk=0;
+		File file = new File(UP_DIR+File.separator+fvo.getSave_dir()+File.separator+fvo.getUuid()+"_"+fvo.getFile_name());
+		File tFile = new File(UP_DIR+File.separator+fvo.getSave_dir()+File.separator+fvo.getUuid()+"_th_"+fvo.getFile_name());
+		try {
+			
+			if(file.exists()) {
+				if(file.delete()) {
+					log.info("삭제되었습니다.");
+					isOk = 1;
+				}else {
+					log.info("삭제 실패");
+				}
+			}else {
+				log.info("파일이 없습니다.");
+			}
+			
+			if(tFile.exists()) {
+				if(tFile.delete()) {
+					log.info("썸네일 삭제되었습니다.");
+					isOk = 1;
+				}else {
+					log.info("썸네일 삭제 실패");
+				}
+			}else {
+				log.info("썸네일 파일이 없습니다.");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return isOk;
+	}
+	
 	// image 인지 아닌지 체크 (tika)
 	private boolean isImageFile(File storeFile) throws IOException {
 		String mimeType = new Tika().detect(storeFile); // mimeType ===> image/png, image/jpg

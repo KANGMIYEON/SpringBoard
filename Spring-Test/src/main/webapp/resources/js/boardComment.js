@@ -57,8 +57,8 @@ function getCommentList(bno){
     spreadCommentFromServer(bno).then(result =>{ // bno 주고 result 받아옴
         console.log(result);
         const ul = document.getElementById('cmtListArea');
+        ul.innerHTML = ""; // 기존에 있던 내용 지워주기
         if(result.length > 0){ // 값이 있다면 ~
-            ul.innerHTML = ""; // 기존에 있던 내용 지워주기
             for(let cvo of result){
                 let li = `<li data-cno="${cvo.cno}" class="list-group-item d-flex justify-content-between align-items-start">`;
                     li += `<div class="ms-2 me-auto"><div class="fw-bold">${cvo.writer}</div>`;

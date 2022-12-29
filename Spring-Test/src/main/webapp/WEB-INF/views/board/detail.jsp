@@ -74,7 +74,7 @@
 		</ul>
 	</div>
 	
-	<c:if test="${ses != null || ses.id == board.writer}">
+	<c:if test="${ses != null && ses.id == board.writer}">
 		<a href="/board/modify?bno=${board.bno}"><button type="submit" class="btn btn-outline-dark">수정</button></a>
 		<a href="/board/remove?bno=${board.bno}"><button type="submit" class="btn btn-outline-dark">삭제</button></a>
 	</c:if>

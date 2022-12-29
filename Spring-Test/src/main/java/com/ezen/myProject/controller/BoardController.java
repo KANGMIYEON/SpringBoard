@@ -116,12 +116,11 @@ public class BoardController {
 		// user 비교 : 안 해도 상관은 없음
 		UserVO user = userDao.getUser(bvo.getWriter());
 		
-		List<FileVO> fList = null; // 파일에 리스트를 담을 객체 준비
+		List<FileVO> fList = new ArrayList<FileVO>(); // 파일에 리스트를 담을 객체 준비
 		if(files[0].getSize() > 0) { // files 에 데이터가 담겨 있음 (파일의 값이 있음)
 			fList = fhd.uploadFiles(files); // FileHandler야 리스트 줘~
 		} else {
 			log.info("empty file");
-			fList = new ArrayList<FileVO>();
 		}
 		int isUp = bsv.modifyFile(new BoardDTO(bvo, fList), user);
 		
@@ -142,9 +141,15 @@ public class BoardController {
 	
 	// 첨부파일 삭제
 	@DeleteMapping(value = "/file/{uuid}", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> remove(@PathVariable("uuid") String uuid){
+	public ResponseEntity<String> removeFile(@PathVariable("uuid") String uuid){
 		log.info(">>> comment File delete uuid : " + uuid);
+		// 1. 파일 가져오기
+		FileVO fvo = bsv.getFile(uuid);
+		// 2. 파일 삭제
 		int isUp = bsv.removeFile(uuid);
+		// 3. 실제 경로(폴더)에 있는 파일 삭제
+		isUp *= fhd.deleteFile(fvo);
+		
 		return isUp > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

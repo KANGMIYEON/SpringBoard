@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ezen.myProject.domain.BoardDTO;
 import com.ezen.myProject.domain.BoardVO;
+import com.ezen.myProject.domain.FileVO;
 import com.ezen.myProject.domain.PagingVO;
 import com.ezen.myProject.domain.UserVO;
 
@@ -32,5 +33,7 @@ public interface BoardService {
 	int modifyFile(BoardDTO boardDTO, UserVO user);
 
 	int removeFile(String uuid);
+
+	FileVO getFile(String uuid);
 
 }
